@@ -13,6 +13,7 @@ A Chrome extension for YouTube that loops videos, plays your own ordered playlis
 - Titles and thumbnails load automatically. Drag to reorder, ✕ to remove, click a song to play from there.
 - Play/Stop, Previous, Next, and **Repeat list**.
 - Plays in your order, switching songs without a page reload, and keeps going while the YouTube tab is in the background.
+- When the list ends (and Repeat list is off) it stops there, and YouTube's autoplay doesn't jump to a random video.
 - Automatically answers YouTube's "Continue watching?" pop-up while loop or the playlist is on.
 
 **Ad blocker** (on by default, can be turned off)
@@ -28,5 +29,15 @@ A Chrome extension for YouTube that loops videos, plays your own ordered playlis
 
 ## Notes
 
-- The playlist runs inside the YouTube tab, so that tab must stay open (it doesn't have to be the active one).
+- The playlist runs inside the YouTube tab, so that tab must stay open (it doesn't have to be the active one). Other YouTube tabs are left alone, even if they show a song from the list.
 - YouTube changes its ad system often, so some ads may get through.
+
+## Development
+
+```bash
+npm install && npx playwright install chromium
+npm test            # unit + offline browser tests (fake YouTube)
+npm run test:live   # smoke test on real youtube.com
+```
+
+See [TESTING.md](TESTING.md) for which tests to add with each change. CI runs `npm test` on every push.

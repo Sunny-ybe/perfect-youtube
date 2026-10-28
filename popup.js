@@ -1,22 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const store = chrome.storage.local;
-let S = { loop: false, adBlock: true, timerEnd: null, playlist: [], plIndex: 0, plActive: false, plRepeat: false };
-
-// Accepts watch?v=, youtu.be/, shorts/, embed/, live/, music.youtube.com and bare 11-char IDs.
-function parseId(raw) {
-  const s = raw.trim();
-  if (!s) return null;
-  if (/^[\w-]{11}$/.test(s)) return s;
-  try {
-    const u = new URL(s.startsWith('http') ? s : 'https://' + s);
-    if (!/(^|\.)youtube\.com$|(^|\.)youtu\.be$|(^|\.)youtube-nocookie\.com$/.test(u.hostname)) return null;
-    if (u.hostname.endsWith('youtu.be')) return u.pathname.slice(1, 12) || null;
-    const v = u.searchParams.get('v');
-    if (v) return v.slice(0, 11);
-    const m = u.pathname.match(/^\/(?:shorts|embed|live|v)\/([\w-]{11})/);
-    return m ? m[1] : null;
-  } catch { return null; }
-}
+let S = { ...BT.DEFAULTS };
 
 async function fetchTitle(id) {
   try {
@@ -26,24 +10,8 @@ async function fetchTitle(id) {
   } catch { return null; }
 }
 
-const watchUrl = (id) => `https://www.youtube.com/watch?v=${id}`;
-
-async function openInTab(url) {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (tab && /^https:\/\/(www|m)\.youtube\.com\//.test(tab.url || '')) {
-    await chrome.tabs.update(tab.id, { url });
-  } else {
-    await chrome.tabs.create({ url });
-  }
-}
-
-async function playAt(i) {
-  if (!S.playlist.length) return;
-  i = (i + S.playlist.length) % S.playlist.length;
-  // Loop-one would block the playlist from advancing, so turn it off when a list starts.
-  await store.set({ plActive: true, plIndex: i, loop: false });
-  await openInTab(watchUrl(S.playlist[i].id));
-}
+// The background worker opens the tab, since the popup closes as soon as a new tab takes focus.
+const playAt = (i) => S.playlist.length && chrome.runtime.sendMessage({ type: 'playAt', i });
 
 // ---------- Rendering ----------
 function render() {
@@ -88,37 +56,22 @@ function render() {
   });
 }
 
-function fmt(ms) {
-  const t = Math.max(0, Math.round(ms / 1000));
-  const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
-  return (h ? `${h}:${String(m).padStart(2, '0')}` : `${m}`) + `:${String(s).padStart(2, '0')}`;
-}
-
 function renderTimer() {
   const on = S.timerEnd && S.timerEnd > Date.now();
   $('timerLeft').classList.toggle('hidden', !on);
   $('cancelTimer').classList.toggle('hidden', !on);
-  if (on) $('timerLeft').textContent = `stops in ${fmt(S.timerEnd - Date.now())}`;
+  if (on) $('timerLeft').textContent = `stops in ${BT.fmt(S.timerEnd - Date.now())}`;
 }
 setInterval(renderTimer, 1000);
 
 // ---------- Playlist edits (index-aware so the current song stays current) ----------
 async function removeAt(i) {
-  const playlist = S.playlist.filter((_, j) => j !== i);
-  let plIndex = S.plIndex;
-  if (i < plIndex) plIndex--;
-  if (plIndex >= playlist.length) plIndex = Math.max(0, playlist.length - 1);
-  await store.set({ playlist, plIndex, plActive: S.plActive && playlist.length > 0 });
+  await store.set(BT.removeAt(S, i));
 }
 
 async function move(from, to) {
-  if (from === to || isNaN(from)) return;
-  const playlist = [...S.playlist];
-  const [item] = playlist.splice(from, 1);
-  playlist.splice(to, 0, item);
-  const curId = S.playlist[S.plIndex]?.id;
-  const plIndex = Math.max(0, playlist.findIndex((x) => x.id === curId));
-  await store.set({ playlist, plIndex });
+  const next = BT.move(S, from, to);
+  if (next) await store.set(next);
 }
 
 async function addIds(entries) {
@@ -144,11 +97,9 @@ $('customMin').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('se
 $('cancelTimer').addEventListener('click', () => store.set({ timerEnd: null }));
 
 $('addLinks').addEventListener('click', async () => {
-  const parts = $('links').value.split(/[\s,]+/);
-  const ids = parts.map(parseId).filter(Boolean).map((id) => ({ id }));
-  const bad = parts.filter((p) => p.trim() && !parseId(p)).length;
+  const { ids, bad } = BT.parseLinks($('links').value);
   $('addLinks').textContent = 'Adding…';
-  await addIds(ids);
+  await addIds(ids.map((id) => ({ id })));
   $('addLinks').textContent = 'Add links';
   $('links').value = bad ? `// ${bad} link(s) weren't YouTube videos` : '';
   if (bad) setTimeout(() => { if ($('links').value.startsWith('//')) $('links').value = ''; }, 2500);
@@ -156,7 +107,7 @@ $('addLinks').addEventListener('click', async () => {
 
 $('addCurrent').addEventListener('click', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  const id = tab?.url && parseId(tab.url);
+  const id = tab?.url && BT.parseId(tab.url);
   if (!id) { $('addCurrent').textContent = 'Not a video'; setTimeout(() => ($('addCurrent').textContent = '+ Current video'), 1500); return; }
   let title = tab.title?.replace(/^\(\d+\)\s*/, '').replace(/ - YouTube$/, '');
   try { title = (await chrome.tabs.sendMessage(tab.id, { type: 'current' }))?.title || title; } catch {}

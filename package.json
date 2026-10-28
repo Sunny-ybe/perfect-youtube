@@ -1,0 +1,14 @@
+{
+  "name": "backtrack",
+  "private": true,
+  "description": "Backtrack Chrome extension: test tooling only (the extension itself has no build step).",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:e2e": "playwright test --project=e2e",
+    "test:live": "playwright test --project=live"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

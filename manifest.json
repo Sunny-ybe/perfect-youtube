@@ -37,6 +37,7 @@
         "https://m.youtube.com/*"
       ],
       "js": [
+        "lib.js",
         "content.js"
       ],
       "css": [
