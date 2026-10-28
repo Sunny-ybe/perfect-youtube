@@ -1,0 +1,20 @@
+/* Hide ad slots when ad blocking is on (class set by content.js) */
+html.ytlp-noads ytd-ad-slot-renderer,
+html.ytlp-noads ytd-in-feed-ad-layout-renderer,
+html.ytlp-noads ytd-display-ad-renderer,
+html.ytlp-noads ytd-promoted-sparkles-web-renderer,
+html.ytlp-noads ytd-promoted-video-renderer,
+html.ytlp-noads ytd-banner-promo-renderer,
+html.ytlp-noads ytd-statement-banner-renderer,
+html.ytlp-noads ytd-companion-slot-renderer,
+html.ytlp-noads ytd-action-companion-ad-renderer,
+html.ytlp-noads ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"],
+html.ytlp-noads ytd-rich-item-renderer:has(> #content > ytd-ad-slot-renderer),
+html.ytlp-noads #player-ads,
+html.ytlp-noads #masthead-ad,
+html.ytlp-noads .ytp-ad-overlay-container,
+html.ytlp-noads .ytp-ad-overlay-slot,
+html.ytlp-noads ytm-promoted-sparkles-web-renderer,
+html.ytlp-noads ad-slot-renderer {
+  display: none !important;
+}

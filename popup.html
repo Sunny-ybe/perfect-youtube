@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="logo">▶</span>
+    <h1>Backtrack</h1>
+  </header>
+
+  <section class="row">
+    <div>
+      <div class="label">Loop current video</div>
+      <div class="hint">Alt+L toggles it on any YouTube tab</div>
+    </div>
+    <label class="switch"><input type="checkbox" id="loop"><span></span></label>
+  </section>
+
+  <section class="row">
+    <div>
+      <div class="label">Block &amp; skip ads</div>
+      <div class="hint">Blocks ad requests, auto-skips video ads</div>
+    </div>
+    <label class="switch"><input type="checkbox" id="adBlock"><span></span></label>
+  </section>
+
+  <section>
+    <div class="label">Sleep timer <span id="timerLeft" class="pill hidden"></span></div>
+    <div class="chips" id="timerChips">
+      <button data-min="15">15m</button>
+      <button data-min="30">30m</button>
+      <button data-min="45">45m</button>
+      <button data-min="60">1h</button>
+      <button data-min="90">1.5h</button>
+    </div>
+    <div class="inline">
+      <input type="number" id="customMin" min="1" max="1440" placeholder="Custom minutes">
+      <button id="setCustom">Set</button>
+      <button id="cancelTimer" class="ghost hidden">Cancel</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Playlist <span id="plCount" class="muted"></span></div>
+    <textarea id="links" rows="3" placeholder="Paste YouTube links (one per line, or comma-separated)"></textarea>
+    <div class="inline">
+      <button id="addLinks">Add links</button>
+      <button id="addCurrent" class="ghost">+ Current video</button>
+    </div>
+    <ol id="playlist"></ol>
+    <div class="empty hidden" id="empty">No songs yet. Paste links above.</div>
+    <div class="controls">
+      <button id="prev" title="Previous">⏮</button>
+      <button id="play" class="primary">▶ Play</button>
+      <button id="next" title="Next">⏭</button>
+      <label class="check"><input type="checkbox" id="plRepeat"> Repeat list</label>
+    </div>
+    <div class="inline end">
+      <button id="clear" class="ghost danger">Clear list</button>
+    </div>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>
