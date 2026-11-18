@@ -5,7 +5,6 @@
   "description": "Loop YouTube videos, set a sleep timer, play your own ordered playlist of links, and skip ads.",
   "permissions": [
     "storage",
-    "tabs",
     "declarativeNetRequest"
   ],
   "host_permissions": [
