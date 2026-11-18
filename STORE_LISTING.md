@@ -13,7 +13,7 @@ Upload `dist/backtrack-1.1.0.zip`. Everything below goes into the developer dash
 **Name:** Backtrack (from the manifest). Don't put "YouTube" in the name. Trademark rules allow it only in the description, as "for YouTube".
 
 **Summary** (from the manifest description, 132 characters max):
-Loop YouTube videos, set a sleep timer, play your own ordered playlist of links, and skip ads.
+Uninterrupted YouTube listening: loop videos, play your own playlist, set a sleep timer, and skip ads.
 
 **Category:** Entertainment (or Tools)
 
@@ -21,29 +21,41 @@ Loop YouTube videos, set a sleep timer, play your own ordered playlist of links,
 
 **Description:**
 
-Backtrack makes YouTube better for music and long listening sessions.
+Backtrack keeps YouTube playing what you chose, for as long as you choose, without interruptions. It's built for music and long listening sessions.
 
-LOOP
+KEEP IT PLAYING: LOOP
 • Repeat the current video forever with one click, or press Alt+L.
 • The toolbar icon shows ∞ while loop is on.
 
-SLEEP TIMER
-• Presets of 15m, 30m, 45m, 1h and 1.5h, or any number of minutes you choose.
-• A live countdown. The video pauses when time is up.
-
-YOUR OWN PLAYLIST
+KEEP IT PLAYING: YOUR OWN PLAYLIST
 • Paste YouTube links in any format: watch, youtu.be, Shorts, music.youtube and more.
 • Drag to reorder. Play, Previous, Next and Repeat list.
 • Plays in your order without reloading the page, even while the tab is in the background.
 • Stops when the list ends instead of letting autoplay pick a random video.
-• Answers the "Continue watching?" pop-up for you.
 
-AD SKIPPING (can be turned off)
-• Blocks known ad-server requests and skips video ads that still play.
+NO INTERRUPTIONS
+• Skips video ads, and blocks known ad-server requests, so playback isn't broken up. You can turn this off.
 • Hides ad slots on the home page, search results and sidebar.
+• Answers the "Continue watching?" pop-up for you while loop or the playlist is on.
+
+STOP WHEN YOU WANT: SLEEP TIMER
+• Presets of 15m, 30m, 45m, 1h and 1.5h, or any number of minutes you choose.
+• A live countdown. The video pauses when time is up.
+
+HOW TO INSTALL
+1. Click "Add to Chrome", then "Add extension".
+2. Click the puzzle-piece icon in Chrome's toolbar and pin Backtrack so it's always one click away.
+3. Reload any YouTube tabs that were already open.
+
+HOW TO USE
+• Loop: open a YouTube video, click the Backtrack icon and switch on "Loop current video", or press Alt+L on any YouTube tab.
+• Playlist: paste one or more YouTube links into the box and click "Add links", or click "+ Current video" while watching. Press ▶ Play. Use ⏮ / ⏭ to skip, drag songs to reorder, and tick "Repeat list" to start over at the end. Keep the YouTube tab open; it can be in the background.
+• Sleep timer: pick a preset or type minutes and click "Set". Click "Cancel" to stop it.
+• Ad skipping: on by default. Switch off "Block & skip ads" in the popup to turn it off.
+• To change the Alt+L shortcut, go to chrome://extensions/shortcuts.
 
 PRIVATE BY DESIGN
-• No account, no tracking, no analytics. Your playlist stays on your computer.
+• No account, no tracking, no analytics. Your playlist and settings stay on your computer.
 
 Backtrack is an independent project and is not affiliated with or endorsed by YouTube or Google.
 
@@ -55,7 +67,7 @@ Backtrack is an independent project and is not affiliated with or endorsed by Yo
 ## Privacy practices tab
 
 **Single purpose:**
-Backtrack improves video playback on YouTube: it loops videos, plays a user-defined ordered playlist, pauses playback on a sleep timer, and skips ads, all on youtube.com pages.
+Uninterrupted listening on YouTube. Backtrack keeps YouTube playing what the user chose, for as long as they chose, without interruptions: it loops a video, plays the user's own ordered playlist, stops playback on a sleep timer, and skips the ads and "Continue watching?" prompts that break playback. Every feature acts only on the YouTube video player, on youtube.com pages.
 
 **Permission justifications:**
 
