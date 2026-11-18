@@ -31,4 +31,4 @@ Backtrack runs only on `www.youtube.com` and `m.youtube.com`. It reads the video
 
 ## Contact
 
-Questions: open an issue at https://github.com/Sunny-ybe/perfect-youtube/issues
+Questions: leave a comment on this page.

@@ -78,9 +78,8 @@ Uninterrupted listening on YouTube. Backtrack keeps YouTube playing what the use
 
 **Data usage:** Chrome's User Data FAQ counts data kept only on the device, and reading page content, as handling user data. So tick **Website content**: the playlist stores YouTube video IDs and titles, and the extension reads the YouTube player state. Leave every other category unticked. Then certify all three statements: no selling or transferring data to third parties, no use unrelated to the single purpose, no use for creditworthiness or lending.
 
-**Privacy policy URL:** a public URL to `PRIVACY.md`, for example
-https://github.com/Sunny-ybe/perfect-youtube/blob/main/PRIVACY.md
-(this needs the repo to be public and the branch merged), or host the same text on any page you control.
+**Privacy policy URL:** https://gist.github.com/Sunny-ybe/92d50cc8dee17c3f901b99c3594782b4
+This is a public gist of `PRIVACY.md`. If you change PRIVACY.md, update the gist too.
 
 ## Distribution tab
 
