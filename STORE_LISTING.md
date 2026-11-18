@@ -2,6 +2,12 @@
 
 Upload `dist/backtrack-1.1.0.zip`. Everything below goes into the developer dashboard by hand.
 
+## Account tab (once, before the first submit)
+
+- Publisher name: shown as "Offered by" on the listing.
+- Contact email: add it, then click the verification link Chrome emails you. You can't publish until it's verified.
+- Physical address: not needed, since Backtrack has no purchases or subscriptions.
+
 ## Store listing tab
 
 **Name:** Backtrack (from the manifest). Don't put "YouTube" in the name. Trademark rules allow it only in the description, as "for YouTube".
@@ -58,7 +64,7 @@ Backtrack improves video playback on YouTube: it loops videos, plays a user-defi
 - Host permissions (`https://www.youtube.com/*`, `https://m.youtube.com/*`): The content script has to run on YouTube pages to control the video player (loop, pause at sleep-timer end, advance the playlist, skip ads), and the extension needs the YouTube tab's URL to add the current video to the playlist. No other sites are accessed.
 - Remote code: **No, I am not using remote code.** All JavaScript is bundled in the package.
 
-**Data usage:** tick **none** of the data categories. Backtrack collects no user data; the playlist and settings stay in local extension storage. Then certify all three statements: no selling of data, no use unrelated to the single purpose, no use for creditworthiness or lending.
+**Data usage:** Chrome's User Data FAQ counts data kept only on the device, and reading page content, as handling user data. So tick **Website content**: the playlist stores YouTube video IDs and titles, and the extension reads the YouTube player state. Leave every other category unticked. Then certify all three statements: no selling or transferring data to third parties, no use unrelated to the single purpose, no use for creditworthiness or lending.
 
 **Privacy policy URL:** a public URL to `PRIVACY.md`, for example
 https://github.com/Sunny-ybe/perfect-youtube/blob/main/PRIVACY.md

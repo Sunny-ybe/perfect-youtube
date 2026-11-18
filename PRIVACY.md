@@ -4,13 +4,19 @@ _Last updated: November 17, 2026_
 
 Backtrack is a Chrome extension that adds looping, a sleep timer, an ordered playlist and ad skipping to YouTube.
 
-## What Backtrack stores
+## What Backtrack handles and why
 
-Backtrack saves its settings and your playlist (video IDs and titles) in Chrome's local extension storage (`chrome.storage.local`) on your own computer. This data never leaves your device, and it is deleted when you remove the extension.
+- **Your playlist:** the YouTube video IDs and titles you add. When you click "+ Current video", Backtrack reads the address and title of the YouTube tab you are on to get them.
+- **Your settings:** loop on/off, ad skipping on/off, repeat list, and the sleep-timer end time.
+- **YouTube page content:** on YouTube pages, Backtrack reads the video player's state (for example, whether an ad is showing) so it can loop, pause, advance the playlist and skip ads. It does not save or send this.
+
+## Where it is stored and for how long
+
+The playlist and settings are saved only in Chrome's local extension storage (`chrome.storage.local`) on your own computer. They never leave your device. You can delete them at any time: "Clear list" empties the playlist, and removing the extension deletes everything.
 
 ## What Backtrack sends
 
-Backtrack has no server and does not collect, sell or share any personal data. It does not track you, use analytics or show ads.
+Backtrack has no server. It does not send any of the data above to the developer or anyone else, and it does not sell or share data, track you, use analytics or show ads.
 
 The only network requests it makes are to YouTube itself:
 
